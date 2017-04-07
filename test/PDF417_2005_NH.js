@@ -8,7 +8,7 @@ DCB
 DCD
 DBA11111112
 DCSSMITH
-DCTJOHN A
+DCTJOHN A B
 DBD03016013
 DBB10071990
 DBC1
@@ -44,8 +44,11 @@ describe('PDF417, NH', function() {
   });
 
   describe('name', function() {
-      it('first should be set to JOHN A', function(){
-          expect(res.name.first).to.equal("JOHN A");
+      it('first should be set to JOHN', function(){
+          expect(res.name.first).to.equal("JOHN");
+      });
+      it('middle should be set to A B', function(){
+          expect(res.name.middle).to.equal("A B");
       });
       it('last should be set to SMITH', function(){
           expect(res.name.last).to.equal("SMITH");

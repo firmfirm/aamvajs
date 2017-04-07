@@ -4,12 +4,12 @@ var should = require('chai').should(),
 
 var data = `@
 
-ANSI 6360300102DL00390184ZM02230047DLDAQP039023005
-DAAENGLAND,ADAM,N,
-DAG200 MAIN ST #114
+ANSI 6360300102DL00390184ZM02230047DLDAQP032024005
+DAASMITH,JOHN,N,
+DAG100 MAIN ST #112
 DAIKANSAS CITY
 DAJMO
-DAK64105
+DAK62105
 DARF
 DASB
 DATM
@@ -17,7 +17,7 @@ DAU510
 DAW180
 DAYBRO
 DBA20180126
-DBB19820126
+DBB19810126
 DBCM
 DBD20111229
 ZMZMAJACKSON
@@ -47,10 +47,10 @@ describe('gender', function() {
 
 describe('name', function() {
     it('first should be parsed', function(){
-        expect(res.name.first).to.equal("ADAM");
+        expect(res.name.first).to.equal("JOHN");
     });
     it('last should be parsed', function(){
-        expect(res.name.last).to.equal("ENGLAND");
+        expect(res.name.last).to.equal("SMITH");
     });
 });
 

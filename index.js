@@ -58,9 +58,9 @@
           ],
         },
         postProcess(parsedData) {
-          const name = parsedData.DCT.split(',');
+          const name = parsedData.DCT.split(/[\s,]+/i);
           parsedData.DAC = name[0]; // first name
-          parsedData.DAD = name[1]; // middle name
+          parsedData.DAD = name.slice(1).join(' '); // middle name
         },
       },
       // Formats starting from 04 have the same required data elements.
@@ -103,6 +103,7 @@
           console.warn(`Unknown version: '${version[1]}'`);
           return false;
         }
+        console.log('Version', version[1])
         const parsedData = {};
         const required = format.fields.required.map(fieldParser);
         for (let i = 0; i < required.length; i++) {
