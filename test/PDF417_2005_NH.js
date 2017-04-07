@@ -3,7 +3,10 @@ var should = require('chai').should(),
     aamva = require('../index');
 
 var data = `@
-ANSI 111111030001DL01111111DCA DCB DCD DBA11111112
+ANSI 111111030001DL01111111DCA
+DCB
+DCD
+DBA11111112
 DCSSMITH
 DCTJOHN A
 DBD03016013

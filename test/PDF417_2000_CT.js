@@ -7,24 +7,23 @@ describe('2000 / CT', function() {
   let res;
   before(function() {
     const data = `@
-    AMVA
-    6360060101DL00290198DAAREGULARLPSAMPLE,SELECTCTID,A,3R
-    DDAG60 STATE ST
-    DAIWETHERSFIELD
-    DAJCT
-    DAK061091896
-    DAQ119000555
-    DARD
-    DASB
-    DAT
-    DBA20131107
-    DBB19940101
-    DBC1
-    DBD20111115
-    DAU601
-    DAYBLU
-    DBF00
-    DBHY`;
+AMVA 6360060101DL00290198DAAREGULARLPSAMPLE,SELECTDAG,A,3RD
+DAG60 STATE ST
+DAIWETHERSFIELD
+DAJCT
+DAK061091896
+DAQ119000555
+DARD
+DASB
+DAT
+DBA20131107
+DBB19940101
+DBC1
+DBD20111115
+DAU601
+DAYBLU
+DBF00
+DBHY`;
 
     res = aamva.parse(data);
   });
@@ -48,8 +47,8 @@ describe('2000 / CT', function() {
   });
 
   describe('name', function() {
-      it('first should be set to SELECTCTID', function(){
-          expect(res.name.first).to.equal("SELECTCTID");
+      it('first should be set to SELECTDAG', function(){
+          expect(res.name.first).to.equal("SELECTDAG");
       });
       it('last should be set to REGULARLPSAMPLE', function(){
           expect(res.name.last).to.equal("REGULARLPSAMPLE");

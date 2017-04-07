@@ -90,7 +90,7 @@
     const fieldParser = function(name) {
       return {
         name,
-        re: new RegExp(`${name}([^\\r\\n]*)`, 'g'),
+        re: new RegExp(`(?:DL\\d*|[\\r\\n])${name}([^\\r\\n]*)`, 'g'),
       };
     };
 
