@@ -2,9 +2,24 @@ var should = require('chai').should(),
     expect = require('chai').expect,
     aamva = require('../index');
 
-    var data = '@ANSI 111111030001DL01111111DCA DCB DCD DBA11111112DCSSMITH DCTJOHN A DBD03016013DBB10071990DBC1DAYBRODAU11 in DAG111 SMITHS ST DAISMITHSTON DAJNHDAK333333333 DAQ44NST44444 DCGUSADCHNONE';
+var data = `@
+ANSI 111111030001DL01111111DCA DCB DCD DBA11111112
+DCSSMITH
+DCTJOHN A
+DBD03016013
+DBB10071990
+DBC1
+DAYBRO
+DAU11 in
+DAG111 SMITHS ST
+DAI SMITHSTON
+DAJNH
+DAK333333333
+DAQ44NST44444
+DCGUSA
+DCHNONE`;
 
-    var res = aamva.parse(data);
+var res = aamva.parse(data);
 
 describe('PDF417, NH', function() {
   describe('state', function() {
@@ -35,8 +50,8 @@ describe('PDF417, NH', function() {
   });
 
   describe('birthday', function() {
-      it('year should be 19901007', function(){
-          expect(res.birthday).to.equal('19901007');
+      it('year should be 1990-10-07', function(){
+          expect(res.birthday).to.equal('1990-10-07');
       });
   });
 
@@ -46,4 +61,3 @@ describe('PDF417, NH', function() {
       });
   });
 });
-

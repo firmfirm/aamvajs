@@ -2,14 +2,30 @@ var should = require('chai').should(),
     expect = require('chai').expect,
     aamva = require('../index');
 
-    var data = '@ANSI 6360100102DL00390190ZF02290063DLDAADOE,JOHNDAG5929 N ROCK STDAIDELRAY SHOREDAJFLDAK44556-     DAQJ641720820450DARI   DAS          DAT     DBA20210108DBB19770208DBC1DBD20120612DBHN         DAU600ZFZFAREPLACED: 00000000ZFB ZFCP771206120090ZFD ZFE07-01-11';
+    var data = `@ANSI 636015030002DL00410217ZT02580015DLDCACDCBNONEDCDNONEDBA08042015
+    DCSDOE
+    DCTJOHN
+    DBD08192014
+    DBB02081977
+    DBC1
+    DAYBLK
+    DAU 65 IN
+    DAG5929 N ROCK ST
+    DAIAUSTIN
+    DAJTX
+    DAK44556
+    DAQ38884194
+    DCF18613490088119258857
+    DCGUSA
+    DCHNONE
+    DAZBLK
+    DCUZTZTA130ZTBA`;
 
-    var res = aamva.parse(data);
-
+var res = aamva.parse(data);
 
 describe('state', function() {
-    it('should be set to FL', function(){
-        expect(res.state).to.equal("FL");
+    it('should be set to TX', function(){
+        expect(res.state).to.equal("TX");
     });
 });
 
@@ -35,8 +51,8 @@ describe('name', function() {
 });
 
 describe('birthday', function() {
-    it('year should be 19770208', function(){
-        expect(res.birthday).to.equal('19770208');
+    it('should be 02081977', function() {
+      expect(res.birthday).to.equal('1977-02-08');
     });
 });
 
@@ -44,4 +60,5 @@ describe('postal_code', function() {
     it('should be 44556', function(){
         expect(res.postal_code).to.equal("44556");
     });
+
 });

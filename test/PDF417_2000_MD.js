@@ -2,11 +2,10 @@ var should = require('chai').should(),
     expect = require('chai').expect,
     aamva = require('../index');
 
-    var data = '@\n\u001e\rAAMVA6360030101DL00290192DLDAQK-134-123-145-103\nDAAJOHNSON,JACK,,3RD\nDAG1234 BARNEYS INN PL\nDAIBALTIMORE\nDAJMD\nDAK21230 \nDARC \nDAS \nDAT \nDAU505\nDAW135\nDBA20170209\nDBB19910209\nDBC1\nDBD20120210\nDBHN\r';
+var data = '@\n\u001e\rAAMVA6360030101DL00290192DLDAQK-134-123-145-103\nDAAJOHNSON,JACK,,3RD\nDAG1234 BARNEYS INN PL\nDAIBALTIMORE\nDAJMD\nDAK21230 \nDARC \nDAS \nDAT \nDAU505\nDAW135\nDBA20170209\nDBB19910209\nDBC1\nDBD20120210\nDBHN\r';
 
-    var res = aamva.parse(data);
+var res = aamva.parse(data);
 
-console.log(res);
 describe('state', function() {
     it('should be set to MD', function(){
         expect(res.state).to.equal("MD");
@@ -35,8 +34,8 @@ describe('name', function() {
 });
 
 describe('birthday', function() {
-    it('should be 19910209', function(){
-        expect(res.birthday).to.equal('19910209');
+    it('should be 1991-02-09', function(){
+        expect(res.birthday).to.equal('1991-02-09');
     });
 });
 
