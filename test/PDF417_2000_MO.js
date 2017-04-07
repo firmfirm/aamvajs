@@ -35,7 +35,7 @@ describe('state', function() {
 
 describe('address', function() {
     it('should be parsed', function(){
-        expect(res.address).to.equal("200 MAIN ST #114");
+        expect(res.address).to.equal("100 MAIN ST #112");
     });
 });
 
@@ -56,7 +56,7 @@ describe('name', function() {
 
 describe('birthday', function() {
     it('year should be parsed', function(){
-        expect(res.birthday).to.equal('1982-01-26');
+        expect(res.birthday).to.equal('1981-01-26');
     });
 });
 
@@ -68,6 +68,6 @@ describe('exp', function() {
 
 describe('postal_code', function() {
     it('should be parsed', function(){
-        expect(res.postal_code).to.equal("64105");
+        expect(res.postal_code).to.equal("62105");
     });
 });

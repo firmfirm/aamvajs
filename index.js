@@ -103,7 +103,6 @@
           console.warn(`Unknown version: '${version[1]}'`);
           return false;
         }
-        console.log('Version', version[1])
         const parsedData = {};
         const required = format.fields.required.map(fieldParser);
         for (let i = 0; i < required.length; i++) {
@@ -175,5 +174,12 @@
         return rawData;
     };
 
-  global.parse = parse;
+  global.parse = function(data) {
+    try {
+      return parse(data);
+    } catch (e) {
+      console.error('Unexpected driver\'s license scanner failure', e);
+      return false;
+    }
+  };
 }(this));
