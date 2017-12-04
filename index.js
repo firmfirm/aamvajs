@@ -16,6 +16,16 @@
   //   'DCF',
   // ],
 
+  const postProcessDAA = function(parsedData) {
+    const name = parsedData.DAA.split(',');
+    parsedData.DCS = name[0];
+    parsedData.DAC = name[1];
+    parsedData.DAD = name[2];
+
+    // drivers license class
+    parsedData.DCA = parsedData.DAR;
+  };
+
   const formats = {
     '01': {
       fields: {
@@ -26,15 +36,7 @@
         //   'DBP', 'DBQ', 'DBR', 'DBS',
         // ],
       },
-      postProcess(parsedData) {
-        const name = parsedData.DAA.split(',');
-        parsedData.DCS = name[0];
-        parsedData.DAC = name[1];
-        parsedData.DAD = name[2];
-
-        // drivers license class
-        parsedData.DCA = parsedData.DAR;
-      },
+      postProcess: postProcessDAA,
     },
     '02': {
       fields: {
@@ -45,6 +47,19 @@
           'DCE', 'DAG', 'DAI', 'DAJ', 'DAK', 'DAQ',
           'DCG', 'DCH',
         ],
+      },
+      issuerOverride: {
+        '636035': {
+          fields: {
+            required: [
+              'DAA', 'DBA',
+              'DBD', 'DBB', 'DBC',
+              'DAY', 'DAU',
+              'DAG', 'DAI', 'DAJ', 'DAK', 'DAQ',
+            ],
+          },
+          postProcess: postProcessDAA,
+        },
       },
     },
     '03': {
@@ -93,6 +108,13 @@
     };
   };
 
+  const getOverrides = function(data, format) {
+    const issuerMatch = data.match(/ANSI (\d{6})/, 'g');
+    if (!issuerMatch) return;
+    const issuer = issuerMatch[1];
+    return format.issuerOverride && format.issuerOverride[issuer];
+  }
+
   const parse = function(data) {
       // get version of aamva (before 2000 or after)
       const version = data.match(/[A-Z\s]{5}\d{6}(\d{2})/);
@@ -103,7 +125,10 @@
         return false;
       }
       const parsedData = {};
-      const required = format.fields.required.map(fieldParser);
+      const overrides = getOverrides(data, format);
+      const overrideFields = overrides && overrides.fields && overrides.fields.required;
+      const requiredFields = overrideFields || format.fields.required;
+      const required = requiredFields.map(fieldParser);
       for (let i = 0; i < required.length; i++) {
         const field = required[i];
         const result = field.re.exec(data);
@@ -115,8 +140,9 @@
         // console.log(`parsedData[${field.name}] =`, result[1]);
       }
 
-      if (format.postProcess) {
-        format.postProcess(parsedData);
+      const postProcessFn = (overrides && overrides.postProcess) || format.postProcess;
+      if (postProcessFn) {
+        postProcessFn(parsedData);
       }
 
       var rawData = {
